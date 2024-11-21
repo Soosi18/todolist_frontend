@@ -9,7 +9,7 @@ export const UserContextProvider = ({children}) => {
   useEffect(() => {
     const getUser = async() => {
       try{
-        const { data } = await axios.get('http://localhost:3000/user/current', {withCredentials: true});
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/user/current`, {withCredentials: true});
         if(data.success){
           setCurrentUser(data.username);
         } 
