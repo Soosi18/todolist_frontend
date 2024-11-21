@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const logoutUser = async() => {
   try{
-    await axios.post("http://localhost:3000/user/logout", {}, {withCredentials: true});
+    await axios.post(`${import.meta.env.VITE_API_URL}/user/logout`, {}, {withCredentials: true});
   }
   catch(AxiosError){
     console.log(AxiosError);

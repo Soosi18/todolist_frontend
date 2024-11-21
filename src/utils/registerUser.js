@@ -10,8 +10,10 @@ export const registerUser = async (username, password) => {
     withCredentials: true,
   };
   try {
+    console.log(`${import.meta.env.VITE_API_URL}/user/register`);
+    
     const { data } = await axios.post(
-      "http://localhost:3000/user/register",
+      `${import.meta.env.VITE_API_URL}/user/register`,
       payload,
       headers
     );
