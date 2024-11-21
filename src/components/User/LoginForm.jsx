@@ -10,6 +10,7 @@ const LoginForm = ({ showLoginForm, setShowLoginForm }) => {
   const [passwordStatus, setPasswordStatus] = useState('');
   const {setCurrentUser} = useContext(userContext);
   const [loading, setLoading] = useState(false);
+  const [form] = Form.useForm();
   const [messageApi, contextHolder] = message.useMessage();
 
   const success = (message) => {
@@ -35,6 +36,7 @@ const LoginForm = ({ showLoginForm, setShowLoginForm }) => {
       setShowLoginForm(false);
       setUsername("");
       setPassword("");
+      form.resetFields();
       setCurrentUser(data.username);
       message.success(data.message);
     }
@@ -74,6 +76,7 @@ const LoginForm = ({ showLoginForm, setShowLoginForm }) => {
         title="Log In"
       >
         <Form
+          form={form}
           layout="vertical"
           onFinish={onLogin}
           onFinishFailed={onFinishFailed}

@@ -11,6 +11,7 @@ const RegisterForm = ({ showRegisterForm, setShowRegisterForm }) => {
   const [passwordStatus, setPasswordStatus] = useState('');
   const [confirmPasswordStatus, setConfirmPasswordStatus] = useState('');
   const [loading, setLoading] = useState(false);
+  const [form] = Form.useForm();
   const [messageApi, contextHolder] = message.useMessage();
 
   const success = (message) => {
@@ -36,6 +37,7 @@ const RegisterForm = ({ showRegisterForm, setShowRegisterForm }) => {
         setShowRegisterForm(false);
         setUsername("");
         setPassword("");
+        form.resetFields();
         message.success(data.message);
       }
       else {
@@ -84,6 +86,7 @@ const RegisterForm = ({ showRegisterForm, setShowRegisterForm }) => {
         title="Register"
       >
         <Form
+          form={form}
           layout="vertical"
           onFinish={onRegister}
           onFinishFailed={onFinishFailed}
