@@ -1,19 +1,12 @@
-import axios from "axios";
-import { createContext, useContext, useState, useEffect } from "react";
-import { userContext } from "./userContext";
+import { createContext, useState } from "react";
 
-const listIdContext = createContext(null);
-const { currentUser } = useContext(userContext);
+export const listContext = createContext();
 
-useEffect(() => {
-  if(currentUser){
-
-  }
-
-  return () => {}
-}, [])
-
-
-export const listIdContextProvider = ({children}) => {
-  
+export const ListContextProvider = ({children}) => {
+  const [selectedList, setSelectedList] = useState(null);
+  return(
+    <listContext.Provider value={{selectedList, setSelectedList}}>
+      {children}
+    </listContext.Provider>
+  );
 } 
