@@ -11,7 +11,6 @@ const ListMenu = () => {
   const { currentUser } = useContext(userContext);
   const { setSelectedList } = useContext(listContext);
   const [showListForm, setShowListForm] = useState(false);
-  const [showManageListsForm, setShowManageListsForm] = useState(false);
   let items = [];
   let listItems = [];
 
@@ -19,7 +18,7 @@ const ListMenu = () => {
   useEffect(() => {
     const loadLists = async () => {
       if (currentUser) {
-        const data = await getLists();
+        const data = await getLists();        
         if (data.success) {
           setLists(data.content);
         }
@@ -32,7 +31,7 @@ const ListMenu = () => {
     loadLists();
 
     return () => {};
-  }, [lists, currentUser]);
+  }, [currentUser]);
 
   const handleSelectList = (list_id) => {
     setSelectedList(list_id);
@@ -83,11 +82,11 @@ const ListMenu = () => {
   
   return (
     <>
-      <Menu
+      <Menu 
         theme="dark"
         items={items}
         mode="inline"
-        className="h-screen text-white"
+        className="h-screen bg-gray-950"
       />
       <AddListForm
         showListForm={showListForm}

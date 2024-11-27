@@ -7,7 +7,7 @@ export const editTodoStatus = async (list_id, todo_id, is_complete) => {
   };
 
   try{
-    const { data } = await axios.put(`http://localhost:3000/list/${list_id}/todo/status/${todo_id}`, payload, {withCredentials: true});
+    const { data } = await axios.put(`${import.meta.env.VITE_API_URL}/list/${list_id}/todo/status/${todo_id}`, payload, {withCredentials: true});
     return data;
   }
   catch(AxiosError){

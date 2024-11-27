@@ -16,6 +16,7 @@ const TodoList = () => {
   const [showAddTodoForm, setShowAddTodoForm] = useState(false);
   const [activeTodoId, setActiveTodoId] = useState();
   const [activeTodoDescription, setActiveTodoDescription] = useState();
+  // eslint-disable-next-line no-unused-vars
   const [messageApi, contextHolder] = message.useMessage();
 
   useEffect(() => {
@@ -35,6 +36,7 @@ const TodoList = () => {
     };
   }, [selectedList, currentUser]);
 
+  // eslint-disable-next-line no-unused-vars
   const success = (message) => {
     message.open({
       type: "success",
@@ -42,6 +44,7 @@ const TodoList = () => {
     });
   };
 
+  // eslint-disable-next-line no-unused-vars
   const error = (message) => {
     message.open({
       type: "error",
@@ -69,7 +72,7 @@ const TodoList = () => {
     }
   };
 
-  const handleTodoStatusChange = async ({todo_id, description, is_complete}) => {
+  const handleTodoStatusChange = async ({todo_id, is_complete}) => {
     const data = await editTodoStatus(selectedList, todo_id, !is_complete);
     if(data.success){
       setTodos(todos.map((todo) => {
@@ -84,7 +87,7 @@ const TodoList = () => {
   }
 
   return (
-    <>
+    <div className="bg-gray-900">
       {contextHolder}
       <EditTodoForm 
         showEditForm={showEditForm}
@@ -102,34 +105,38 @@ const TodoList = () => {
       />
       {todos ? (<Button onClick={handleAddTodo}>Add Task</Button>) : null}
       <List
-        bordered
         dataSource={todos}
         renderItem={(item) => {
           return (
-            <List.Item
-              actions={[
-                <Button key="edit" onClick={() => handleEditTodo(item.todo_id, item.description)}>
-                  Edit
-                </Button>,
-                <Popconfirm
-                  key="delete"
-                  title="Delete Task"
-                  description="Are you sure you want to delete this task?"
-                  onConfirm={() => handleDeleteTodo(item)}
-                  okText="Yes"
-                  cancelText="No"
-                >
-                  <Button danger>Delete</Button>
-                </Popconfirm>,
-              ]}
-            >
-              <Checkbox key={item.todo_id} checked={item.is_complete} onChange={() => handleTodoStatusChange(item)}/>
-              {item.description}
-            </List.Item>
+            <div>
+              <List.Item
+                actions={[
+                  <Button key="edit" onClick={() => handleEditTodo(item.todo_id, item.description)}>
+                    Edit
+                  </Button>,
+                  <Popconfirm
+                    key="delete"
+                    title="Delete Task"
+                    description="Are you sure you want to delete this task?"
+                    onConfirm={() => handleDeleteTodo(item)}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <Button danger>Delete</Button>
+                  </Popconfirm>,
+                ]}
+              >
+                <div className="flex gap-4 items-center text-gray-200">
+                  <Checkbox key={item.todo_id} checked={item.is_complete} onChange={() => handleTodoStatusChange(item)}/>
+                  {item.description}
+                </div>
+              </List.Item>
+            </div>
+            
           );
         }}
       />
-    </>
+    </div>
   );
 };
 

@@ -1,13 +1,13 @@
 import axios from "axios";
 
 export const addList = async(listName) => {
-  payload = 
+  const payload = 
   {
     name: listName
   }
 
   try {
-    const { data } = await axios.post("http://localhost:3000/list/", payload, { withCredentials: true });
+    const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/list/`, payload, { withCredentials: true });
     return data;
   }
   catch(AxiosError){

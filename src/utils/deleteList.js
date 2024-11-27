@@ -2,9 +2,7 @@ import axios from "axios";
 
 export const deleteList = async(list_id) =>{
   try{
-    console.log(list_id);
-    
-    const { data } = await axios.delete(`http://localhost:3000/list/${list_id}`, {withCredentials: true});
+    const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/list/${list_id}`, {withCredentials: true});
     return data;
   }
   catch(AxiosError){
